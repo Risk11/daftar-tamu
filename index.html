@@ -5,23 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Generator Undangan - Vina & Iqbal</title>
 
+    <!-- Font Awesome untuk Icon -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Nunito+Sans:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
     <style>
       :root {
-        --primary: #5c3d46; /* Deep Rosewood */
-        --accent: #d4a5b2; /* Sakura Pink */
-        --gold: #b5904d; /* Vintage Gold */
-        --bg-grad: linear-gradient(135deg, #fffbfb 0%, #f9f1f3 100%);
-        --card-bg: rgba(255, 255, 255, 0.95);
-        --text: #4a4a4a;
+        /* PALET MINANG MODERN: Maroon Gelap, Hitam, dan Emas */
+        --primary: #2b0f15;
+        --primary-dark: #1a080c;
+        --accent: #d4af37;
+        --accent-dark: #b38728;
+        --text-light: #f5f0e6;
+        --card-bg: rgba(26, 8, 12, 0.85); /* Transparan gelap */
+        --glass: rgba(43, 15, 21, 0.85);
+
+        /* Warna Marawa Minang */
+        --marawa-black: #111111;
+        --marawa-red: #8b0000;
+        --marawa-yellow: #ffd700;
+
+        /* URL Background Utama (Sama dengan Undangan) */
+        --bg-image-url: url("https://images.unsplash.com/photo-1596423149503-4554b7c6c747?q=80&w=1920&auto=format&fit=crop");
+        --bg-texture: url("https://www.transparenttextures.com/patterns/stardust.png");
       }
 
       * {
@@ -31,22 +44,114 @@
       }
 
       body {
-        font-family: "Nunito Sans", sans-serif;
-        background: var(--bg-grad);
-        color: var(--text);
+        font-family: "Montserrat", sans-serif;
+        background-color: var(--primary-dark);
+        color: var(--text-light);
         padding: 40px 20px;
         min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
       }
 
+      /* --- MASTER BACKGROUND --- */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: var(--bg-image-url);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        filter: grayscale(40%) brightness(30%) sepia(30%) hue-rotate(-20deg);
+        z-index: -2;
+      }
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: var(--bg-texture);
+        background-color: rgba(26, 8, 12, 0.7);
+        z-index: -1;
+      }
+
+      /* --- TYPOGRAPHY EFFECTS --- */
+      .font-cinzel {
+        font-family: "Cinzel", serif;
+      }
+      .font-garamond {
+        font-family: "Cormorant Garamond", serif;
+      }
+
+      .text-gold {
+        background: linear-gradient(
+          to right,
+          #bf953f,
+          #fcf6ba,
+          #b38728,
+          #fcf6ba,
+          #bf953f
+        );
+        background-size: 200% auto;
+        color: var(--accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shineGold 5s linear infinite;
+      }
+      @keyframes shineGold {
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      .marawa-line {
+        width: 120px;
+        height: 4px;
+        margin: 20px auto;
+        background: linear-gradient(
+          to right,
+          var(--marawa-black) 33.3%,
+          var(--marawa-red) 33.3%,
+          var(--marawa-red) 66.6%,
+          var(--marawa-yellow) 66.6%
+        );
+        border-radius: 2px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      /* --- CONTAINER & CARDS --- */
       .container {
         max-width: 850px;
         margin: 0 auto;
         background: var(--card-bg);
         padding: 40px;
-        border-radius: 24px;
-        box-shadow: 0 20px 50px rgba(92, 61, 70, 0.08);
-        border: 1px solid rgba(212, 165, 178, 0.3);
-        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        backdrop-filter: blur(15px);
+        position: relative;
+      }
+
+      /* Ornamen Sudut */
+      .container::before,
+      .container::after {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border: 2px solid var(--accent);
+        opacity: 0.5;
+      }
+      .container::before {
+        top: 15px;
+        left: 15px;
+        border-right: none;
+        border-bottom: none;
+      }
+      .container::after {
+        bottom: 15px;
+        right: 15px;
+        border-left: none;
+        border-top: none;
       }
 
       .header-title {
@@ -56,37 +161,29 @@
       }
 
       .header-title h2 {
-        font-family: "Cormorant Garamond", serif;
-        color: var(--primary);
         font-size: 2.8rem;
         font-weight: 600;
         margin-bottom: 10px;
       }
 
       .header-title p {
-        color: #888;
+        color: #ccc;
         font-size: 1rem;
-        letter-spacing: 2px;
+        letter-spacing: 4px;
         text-transform: uppercase;
       }
 
-      .header-title::after {
-        content: "";
-        display: block;
-        width: 80px;
-        height: 2px;
-        background: var(--gold);
-        margin: 15px auto 0;
-      }
-
       .info-box {
-        background: rgba(212, 165, 178, 0.1);
+        background: rgba(0, 0, 0, 0.4);
         border-left: 4px solid var(--accent);
         padding: 20px;
         margin-bottom: 30px;
-        border-radius: 0 12px 12px 0;
+        border-radius: 0 8px 8px 0;
         font-size: 0.95rem;
-        color: var(--primary);
+        color: #eee;
+        border-top: 1px solid rgba(212, 175, 55, 0.1);
+        border-right: 1px solid rgba(212, 175, 55, 0.1);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
       }
 
       .info-box ul {
@@ -95,33 +192,46 @@
       }
 
       .info-box li {
-        margin-bottom: 5px;
+        margin-bottom: 8px;
+        color: #ccc;
       }
 
+      .info-box strong {
+        color: var(--accent);
+      }
+      .info-box code {
+        background: rgba(212, 175, 55, 0.2);
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: var(--accent);
+      }
+
+      /* --- FORMS --- */
       .form-group {
         margin-bottom: 25px;
       }
 
       label {
         display: block;
-        font-weight: 700;
-        margin-bottom: 8px;
-        color: var(--primary);
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--accent);
         font-size: 0.9rem;
-        letter-spacing: 1px;
+        letter-spacing: 2px;
         text-transform: uppercase;
+        font-family: "Cinzel", serif;
       }
 
       input[type="text"],
       textarea {
         width: 100%;
         padding: 16px;
-        border: 1px solid #eaddd0;
-        border-radius: 12px;
-        background: #fdfafb;
-        font-family: "Nunito Sans", sans-serif;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 6px;
+        background: rgba(0, 0, 0, 0.4);
+        font-family: "Montserrat", sans-serif;
         font-size: 1rem;
-        color: var(--text);
+        color: white;
         transition: all 0.3s ease;
       }
 
@@ -129,10 +239,14 @@
       textarea:focus {
         outline: none;
         border-color: var(--accent);
-        box-shadow: 0 0 0 4px rgba(212, 165, 178, 0.2);
-        background: white;
+        background: rgba(0, 0, 0, 0.6);
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+      }
+      ::placeholder {
+        color: #888;
       }
 
+      /* --- BUTTONS --- */
       .btn-group {
         display: flex;
         gap: 12px;
@@ -141,50 +255,55 @@
       }
 
       .btn-template {
-        background: white;
-        color: var(--primary);
+        background: rgba(0, 0, 0, 0.3);
+        color: var(--accent);
         border: 1px solid var(--accent);
-        padding: 10px 20px;
-        border-radius: 50px;
+        padding: 10px 25px;
+        border-radius: 4px;
         cursor: pointer;
+        font-family: "Cinzel", serif;
         font-weight: 600;
+        letter-spacing: 1px;
         transition: all 0.3s ease;
       }
 
       .btn-template:hover {
-        background: rgba(212, 165, 178, 0.1);
+        background: rgba(212, 175, 55, 0.2);
         transform: translateY(-2px);
       }
 
       .btn-template.active {
-        background: var(--primary);
-        color: white;
-        border-color: var(--primary);
-        box-shadow: 0 5px 15px rgba(92, 61, 70, 0.2);
+        background: var(--accent);
+        color: var(--primary-dark);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
       }
 
       .btn-primary {
-        background: linear-gradient(135deg, var(--primary), #7d5a63);
-        color: white;
+        background: rgba(26, 8, 12, 0.6);
+        color: var(--accent);
         width: 100%;
         padding: 18px;
         font-size: 1.1rem;
+        font-family: "Cinzel", serif;
         font-weight: 700;
-        border: none;
-        border-radius: 50px;
+        border: 1px solid var(--accent);
+        border-radius: 4px;
         margin-top: 20px;
         cursor: pointer;
-        letter-spacing: 2px;
+        letter-spacing: 3px;
         text-transform: uppercase;
         transition: all 0.4s ease;
-        box-shadow: 0 10px 20px rgba(92, 61, 70, 0.2);
+        backdrop-filter: blur(5px);
       }
 
       .btn-primary:hover {
+        background: var(--accent);
+        color: var(--primary-dark);
         transform: translateY(-3px);
-        box-shadow: 0 15px 25px rgba(92, 61, 70, 0.3);
+        box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
       }
 
+      /* --- TABLE RESULTS --- */
       .table-wrapper {
         overflow-x: auto;
         margin-top: 40px;
@@ -193,79 +312,90 @@
       .result-table {
         width: 100%;
         border-collapse: collapse;
-        background: white;
-        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
         overflow: hidden;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(212, 175, 55, 0.2);
       }
 
       .result-table th,
       .result-table td {
         padding: 18px;
         text-align: left;
-        border-bottom: 1px solid #f0e6e8;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
       }
 
       .result-table th {
-        background: var(--primary);
-        color: white;
+        background: rgba(0, 0, 0, 0.6);
+        color: var(--accent);
+        font-weight: 600;
+        letter-spacing: 2px;
+        font-family: "Cinzel", serif;
+        text-transform: uppercase;
+        border-bottom: 2px solid var(--accent);
+      }
+
+      .result-table tr:hover {
+        background: rgba(212, 175, 55, 0.05);
+      }
+
+      .result-table td strong {
+        color: var(--text-light);
+        font-size: 1.1rem;
+        font-family: "Cormorant Garamond", serif;
         font-weight: 600;
         letter-spacing: 1px;
       }
 
-      .result-table tr:hover {
-        background: #fdfafb;
-      }
-
-      .result-table td strong {
-        color: var(--primary);
-        font-size: 1.1rem;
-      }
-
       .action-btns {
         display: flex;
-        gap: 8px;
+        gap: 10px;
         flex-wrap: wrap;
       }
 
       .action-btns button {
         font-size: 0.8rem;
-        padding: 8px 15px;
-        border: none;
-        border-radius: 50px;
+        padding: 10px 15px;
+        border: 1px solid transparent;
+        border-radius: 4px;
         cursor: pointer;
-        font-weight: 700;
+        font-weight: 600;
         display: flex;
         align-items: center;
         gap: 6px;
         transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
       }
 
       .action-btns button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
       }
 
       .btn-copy {
-        background: #e9ecef;
-        color: #495057;
+        background: transparent;
+        color: var(--accent);
+        border-color: var(--accent) !important;
       }
       .btn-copy:hover {
-        background: #dee2e6;
+        background: var(--accent);
+        color: var(--primary-dark);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
       }
 
       .btn-wa {
-        background: #25d366;
+        background: #128c7e;
         color: white;
       }
       .btn-wa:hover {
-        background: #128c7e;
+        background: #25d366;
+        box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
       }
 
       /* Responsif untuk HP */
       @media (max-width: 600px) {
         .container {
-          padding: 25px 20px;
+          padding: 30px 20px;
         }
         .header-title h2 {
           font-size: 2rem;
@@ -283,14 +413,15 @@
   <body>
     <div class="container">
       <div class="header-title">
-        <h2>
+        <h2 class="font-cinzel text-gold">
           <i
             class="fas fa-envelope-open-text"
-            style="font-size: 2rem; color: var(--accent); margin-right: 10px"
+            style="font-size: 2rem; margin-right: 10px"
           ></i>
           Guest Generator
         </h2>
-        <p>Undangan Lebih Personal</p>
+        <div class="marawa-line" style="width: 150px"></div>
+        <p>Maklumat Baralek Gadang</p>
       </div>
 
       <div class="info-box">
@@ -355,7 +486,7 @@
             <i class="fas fa-globe"></i> English
           </button>
         </div>
-        <textarea id="pesan-template" rows="9"></textarea>
+        <textarea id="pesan-template" rows="10"></textarea>
       </div>
 
       <button class="btn-primary" onclick="generateList()">
