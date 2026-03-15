@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generator Undangan - Vina & Iqbal</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Nunito+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #5c3d46; /* Deep Rosewood */
+        --accent: #d4a5b2; /* Sakura Pink */
+        --gold: #b5904d; /* Vintage Gold */
+        --bg-grad: linear-gradient(135deg, #fffbfb 0%, #f9f1f3 100%);
+        --card-bg: rgba(255, 255, 255, 0.95);
+        --text: #4a4a4a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Nunito Sans", sans-serif;
+        background: var(--bg-grad);
+        color: var(--text);
+        padding: 40px 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 850px;
+        margin: 0 auto;
+        background: var(--card-bg);
+        padding: 40px;
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(92, 61, 70, 0.08);
+        border: 1px solid rgba(212, 165, 178, 0.3);
+        backdrop-filter: blur(10px);
+      }
+
+      .header-title {
+        text-align: center;
+        margin-bottom: 30px;
+        position: relative;
+      }
+
+      .header-title h2 {
+        font-family: "Cormorant Garamond", serif;
+        color: var(--primary);
+        font-size: 2.8rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .header-title p {
+        color: #888;
+        font-size: 1rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .header-title::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 2px;
+        background: var(--gold);
+        margin: 15px auto 0;
+      }
+
+      .info-box {
+        background: rgba(212, 165, 178, 0.1);
+        border-left: 4px solid var(--accent);
+        padding: 20px;
+        margin-bottom: 30px;
+        border-radius: 0 12px 12px 0;
+        font-size: 0.95rem;
+        color: var(--primary);
+      }
+
+      .info-box ul {
+        margin-top: 10px;
+        padding-left: 20px;
+      }
+
+      .info-box li {
+        margin-bottom: 5px;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      label {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: var(--primary);
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 16px;
+        border: 1px solid #eaddd0;
+        border-radius: 12px;
+        background: #fdfafb;
+        font-family: "Nunito Sans", sans-serif;
+        font-size: 1rem;
+        color: var(--text);
+        transition: all 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(212, 165, 178, 0.2);
+        background: white;
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+      }
+
+      .btn-template {
+        background: white;
+        color: var(--primary);
+        border: 1px solid var(--accent);
+        padding: 10px 20px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-template:hover {
+        background: rgba(212, 165, 178, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .btn-template.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+        box-shadow: 0 5px 15px rgba(92, 61, 70, 0.2);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), #7d5a63);
+        color: white;
+        width: 100%;
+        padding: 18px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 50px;
+        margin-top: 20px;
+        cursor: pointer;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 20px rgba(92, 61, 70, 0.2);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 25px rgba(92, 61, 70, 0.3);
+      }
+
+      .table-wrapper {
+        overflow-x: auto;
+        margin-top: 40px;
+      }
+
+      .result-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .result-table th,
+      .result-table td {
+        padding: 18px;
+        text-align: left;
+        border-bottom: 1px solid #f0e6e8;
+      }
+
+      .result-table th {
+        background: var(--primary);
+        color: white;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      .result-table tr:hover {
+        background: #fdfafb;
+      }
+
+      .result-table td strong {
+        color: var(--primary);
+        font-size: 1.1rem;
+      }
+
+      .action-btns {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .action-btns button {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.3s ease;
+      }
+
+      .action-btns button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-copy {
+        background: #e9ecef;
+        color: #495057;
+      }
+      .btn-copy:hover {
+        background: #dee2e6;
+      }
+
+      .btn-wa {
+        background: #25d366;
+        color: white;
+      }
+      .btn-wa:hover {
+        background: #128c7e;
+      }
+
+      /* Responsif untuk HP */
+      @media (max-width: 600px) {
+        .container {
+          padding: 25px 20px;
+        }
+        .header-title h2 {
+          font-size: 2rem;
+        }
+        .action-btns {
+          flex-direction: column;
+        }
+        .action-btns button {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header-title">
+        <h2>
+          <i
+            class="fas fa-envelope-open-text"
+            style="font-size: 2rem; color: var(--accent); margin-right: 10px"
+          ></i>
+          Guest Generator
+        </h2>
+        <p>Undangan Lebih Personal</p>
+      </div>
+
+      <div class="info-box">
+        <strong><i class="fas fa-lightbulb"></i> Petunjuk Pengisian:</strong>
+        <ul>
+          <li>Masukkan nama-nama tamu (satu nama per baris).</li>
+          <li>
+            Pilih teks pengantar, dan <b>jangan hapus</b> kode
+            <code>[nama]</code>, <code>[link-undangan]</code>, atau
+            <code>[mempelai]</code>.
+          </li>
+        </ul>
+      </div>
+
+      <div class="form-group" style="display: none">
+        <label>URL Utama Undangan</label>
+        <input
+          type="text"
+          id="url-undangan"
+          value="https://risk11.github.io/undangan/?to="
+        />
+      </div>
+
+      <div class="form-group">
+        <label><i class="fas fa-user-edit"></i> Nama Yang Mengundang</label>
+        <input
+          type="text"
+          id="nama-pengundang"
+          placeholder="Contoh: Keluarga Bpk. Agus & Bpk. Zulkifli"
+        />
+      </div>
+
+      <div class="form-group">
+        <label><i class="fas fa-heart"></i> Nama Mempelai</label>
+        <input
+          type="text"
+          id="nama-mempelai"
+          value="Vina & Iqbal"
+          placeholder="Contoh: Vina & Iqbal"
+        />
+      </div>
+
+      <div class="form-group">
+        <label><i class="fas fa-users"></i> List Nama Tamu Undangan</label>
+        <textarea
+          id="list-tamu"
+          rows="6"
+          placeholder="1.&#10;2.&#10;3.&#10;dst.."
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><i class="fas fa-align-left"></i> Pilihan Teks Pengantar</label>
+        <div class="btn-group">
+          <button class="btn-template active" onclick="setTemplate('Formal')">
+            <i class="fas fa-star"></i> Formal
+          </button>
+          <button class="btn-template" onclick="setTemplate('Muslim')">
+            <i class="fas fa-moon"></i> Muslim
+          </button>
+          <button class="btn-template" onclick="setTemplate('English')">
+            <i class="fas fa-globe"></i> English
+          </button>
+        </div>
+        <textarea id="pesan-template" rows="9"></textarea>
+      </div>
+
+      <button class="btn-primary" onclick="generateList()">
+        <i class="fas fa-magic"></i> BUAT DAFTAR TAMU
+      </button>
+
+      <div class="table-wrapper">
+        <table class="result-table" id="tabel-hasil" style="display: none">
+          <thead>
+            <tr>
+              <th>Nama Tamu Spesial</th>
+              <th style="width: 350px">Aksi Cepat</th>
+            </tr>
+          </thead>
+          <tbody id="hasil-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      const templates = {
+        Formal:
+          "Kepada Yth. [nama],\n\nTanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami:\n\n[mempelai]\n\nDetail informasi acara dapat dilihat pada tautan berikut:\n[link-undangan]\n\nKehadiran dan doa restu Anda sangat berarti bagi kami.\n\nSalam hormat,\n[pengundang]",
+        Muslim:
+          "Assalamu'alaikum Warahmatullahi Wabarakatuh\n\nKepada Yth. [nama],\n\nDengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami:\n\n[mempelai]\n\nDetail informasi acara dapat dilihat pada tautan berikut:\n[link-undangan]\n\nMerupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.\n\nWassalamu'alaikum Warahmatullahi Wabarakatuh\n\nSalam hormat,\n[pengundang]",
+        English:
+          "Dear [nama],\n\nTogether with our families, we joyfully invite you to share in our happiness as we celebrate our wedding:\n\n[mempelai]\n\nPlease find the details of our wedding at the link below:\n[link-undangan]\n\nYour presence and prayers will make our day truly special.\n\nWarm regards,\n[pengundang]",
+      };
+
+      // Set default template on load
+      document.getElementById("pesan-template").value = templates["Formal"];
+
+      function setTemplate(type) {
+        document
+          .querySelectorAll(".btn-template")
+          .forEach((btn) => btn.classList.remove("active"));
+        event.currentTarget.classList.add("active");
+        document.getElementById("pesan-template").value = templates[type];
+      }
+
+      function generateList() {
+        const urlUtama = document.getElementById("url-undangan").value;
+        const pengundang =
+          document.getElementById("nama-pengundang").value ||
+          "Kami yang berbahagia";
+        const mempelai = document.getElementById("nama-mempelai").value;
+        const rawTamu = document.getElementById("list-tamu").value;
+        const templatePesan = document.getElementById("pesan-template").value;
+
+        if (!rawTamu.trim()) {
+          alert("Silakan masukkan nama tamu terlebih dahulu!");
+          return;
+        }
+
+        const listTamu = rawTamu
+          .split("\n")
+          .filter((name) => name.trim() !== "");
+        const tbody = document.getElementById("hasil-body");
+        tbody.innerHTML = "";
+
+        listTamu.forEach((tamu) => {
+          const namaFormat = tamu.trim();
+          // Membuat URL ramah URL
+          const linkPersonal = urlUtama + encodeURIComponent(namaFormat);
+
+          // Mengganti variabel di dalam template pesan
+          let pesanAkhir = templatePesan
+            .replace(/\[nama\]/g, namaFormat)
+            .replace(/\[link-undangan\]/g, linkPersonal)
+            .replace(/\[mempelai\]/g, mempelai)
+            .replace(/\[pengundang\]/g, pengundang);
+
+          const row = `<tr>
+                <td><strong>${namaFormat}</strong></td>
+                <td class="action-btns">
+                    <button class="btn-copy" onclick="copyText('${linkPersonal}')"><i class="fas fa-link"></i> Link</button>
+                    <button class="btn-copy" onclick="copyText(\`${pesanAkhir.replace(/`/g, "\\`")}\`)"><i class="fas fa-copy"></i> Teks</button>
+                    <button class="btn-wa" onclick="bukaWA(\`${encodeURIComponent(pesanAkhir)}\`)"><i class="fab fa-whatsapp"></i> Kirim WA</button>
+                </td>
+            </tr>`;
+          tbody.innerHTML += row;
+        });
+
+        document.getElementById("tabel-hasil").style.display = "table";
+
+        // Scroll otomatis ke bagian tabel
+        document
+          .querySelector(".table-wrapper")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      function copyText(text) {
+        navigator.clipboard.writeText(text).then(() => {
+          alert("Berhasil disalin ke clipboard!");
+        });
+      }
+
+      function bukaWA(pesanEncoded) {
+        window.open(`https://wa.me/?text=${pesanEncoded}`, "_blank");
+      }
+    </script>
+  </body>
+</html>
